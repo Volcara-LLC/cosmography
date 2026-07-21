@@ -24,6 +24,8 @@ const localBindingConfig = {
   vars: {
     JUDGE_ACCESS_MODE:
       process.env.JUDGE_ACCESS_MODE === "disabled" ? "disabled" : "shared-code",
+    JUDGE_COOKIE_TTL_SECONDS:
+      process.env.JUDGE_COOKIE_TTL_SECONDS ?? "1814400",
   },
   assets: {
     binding: "ASSETS",

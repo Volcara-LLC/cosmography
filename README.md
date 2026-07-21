@@ -23,15 +23,23 @@ The code is validated only by the Cloudflare Worker. A successful entry creates 
 5. Open **Evidence** or **Sources** on a selected destination to show scientific citations, truth labels, known gaps, and provenance.
 6. Open **Vision** to distinguish the constructed prototype from the long-term product goal.
 
-Use a current desktop version of Chrome or Edge with WebGL enabled. Allow a few seconds for the first lazy 3D renderer load. Do not rely on continuous Mars driving, physical real-time Solar System positions, live telemetry, AI chat, or complete object/mission catalogs.
+Use a current desktop version of Chrome or Edge with WebGL enabled. Allow a few seconds for the first lazy 3D renderer load. The phone layout is currently crowded and is a known post-competition improvement, so judges should use the desktop experience. Do not rely on continuous Mars driving, physical real-time Solar System positions, live telemetry, AI chat, or complete object/mission catalogs.
 
 ## Local run
 
 Requirements are Node.js 22.13 or newer and npm.
 
 ```powershell
-cd apps/web
-npm install
+cd packages/scientific-model
+npm ci
+cd ../relativity
+npm ci
+cd ../connectors
+npm ci
+cd ../../apps/web
+npm ci
+
+# Start the local atlas
 $env:JUDGE_ACCESS_MODE="disabled"
 npm run dev
 ```
@@ -42,7 +50,6 @@ For a production build:
 
 ```powershell
 cd apps/web
-npm install
 npm run build
 ```
 
