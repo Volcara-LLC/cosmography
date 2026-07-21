@@ -1,0 +1,1446 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "30f57732-6c5c-4beb-a320-fab0c1908a6f",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "active_release_channels": {
+      "name": "active_release_channels",
+      "columns": {
+        "channel": {
+          "name": "channel",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activated_at_ms": {
+          "name": "activated_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "activated_by_user_id": {
+          "name": "activated_by_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "active_release_channels_release_id_content_releases_id_fk": {
+          "name": "active_release_channels_release_id_content_releases_id_fk",
+          "tableFrom": "active_release_channels",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "active_release_channels_activated_by_user_id_app_users_id_fk": {
+          "name": "active_release_channels_activated_by_user_id_app_users_id_fk",
+          "tableFrom": "active_release_channels",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "activated_by_user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "app_users": {
+      "name": "app_users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "display_name": {
+          "name": "display_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'active'"
+        },
+        "consent_version": {
+          "name": "consent_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'foundation-0'"
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "last_seen_at_ms": {
+          "name": "last_seen_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "deleted_at_ms": {
+          "name": "deleted_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_app_users_id": {
+          "name": "ck_app_users_id",
+          "value": "\"app_users\".\"id\" GLOB 'usr_*'"
+        },
+        "ck_app_users_status": {
+          "name": "ck_app_users_status",
+          "value": "\"app_users\".\"status\" IN ('active', 'suspended', 'deleted')"
+        }
+      }
+    },
+    "auth_identities": {
+      "name": "auth_identities",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "key_version": {
+          "name": "key_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'v1'"
+        },
+        "subject_hmac": {
+          "name": "subject_hmac",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {
+        "ix_auth_identities_user": {
+          "name": "ix_auth_identities_user",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "auth_identities_user_id_app_users_id_fk": {
+          "name": "auth_identities_user_id_app_users_id_fk",
+          "tableFrom": "auth_identities",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_identities_provider_key_version_subject_hmac_pk": {
+          "columns": [
+            "provider",
+            "key_version",
+            "subject_hmac"
+          ],
+          "name": "auth_identities_provider_key_version_subject_hmac_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_auth_identity_key_version": {
+          "name": "ck_auth_identity_key_version",
+          "value": "length(\"auth_identities\".\"key_version\") BETWEEN 1 AND 32 AND \"auth_identities\".\"key_version\" NOT GLOB '*[^A-Za-z0-9._-]*'"
+        },
+        "ck_auth_identity_hmac": {
+          "name": "ck_auth_identity_hmac",
+          "value": "length(\"auth_identities\".\"subject_hmac\") = 64 AND \"auth_identities\".\"subject_hmac\" NOT GLOB '*[^0-9a-f]*'"
+        }
+      }
+    },
+    "bookmarks": {
+      "name": "bookmarks",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "entity_id": {
+          "name": "entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "navigation_target_id": {
+          "name": "navigation_target_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scene_json": {
+          "name": "scene_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scene_r2_key": {
+          "name": "scene_r2_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {
+        "ix_bookmarks_user_created": {
+          "name": "ix_bookmarks_user_created",
+          "columns": [
+            "user_id",
+            "created_at_ms"
+          ],
+          "isUnique": false
+        },
+        "uq_bookmarks_user_entity_release": {
+          "name": "uq_bookmarks_user_entity_release",
+          "columns": [
+            "user_id",
+            "entity_id",
+            "release_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "bookmarks_user_id_app_users_id_fk": {
+          "name": "bookmarks_user_id_app_users_id_fk",
+          "tableFrom": "bookmarks",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "bookmarks_release_id_content_releases_id_fk": {
+          "name": "bookmarks_release_id_content_releases_id_fk",
+          "tableFrom": "bookmarks",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_bookmark_id": {
+          "name": "ck_bookmark_id",
+          "value": "\"bookmarks\".\"id\" GLOB 'bmk_*'"
+        },
+        "ck_bookmark_scene_json": {
+          "name": "ck_bookmark_scene_json",
+          "value": "json_valid(\"bookmarks\".\"scene_json\")"
+        }
+      }
+    },
+    "content_releases": {
+      "name": "content_releases",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "schema_version": {
+          "name": "schema_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "parent_release_id": {
+          "name": "parent_release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "rollback_release_id": {
+          "name": "rollback_release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "manifest_r2_key": {
+          "name": "manifest_r2_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "manifest_sha256": {
+          "name": "manifest_sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "signature": {
+          "name": "signature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "signing_key_id": {
+          "name": "signing_key_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "published_at_ms": {
+          "name": "published_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "uq_content_releases_version": {
+          "name": "uq_content_releases_version",
+          "columns": [
+            "version"
+          ],
+          "isUnique": true
+        },
+        "ix_content_releases_state": {
+          "name": "ix_content_releases_state",
+          "columns": [
+            "state",
+            "published_at_ms"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_content_release_parent": {
+          "name": "fk_content_release_parent",
+          "tableFrom": "content_releases",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "parent_release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "fk_content_release_rollback": {
+          "name": "fk_content_release_rollback",
+          "tableFrom": "content_releases",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "rollback_release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_content_release_id": {
+          "name": "ck_content_release_id",
+          "value": "length(\"content_releases\".\"id\") BETWEEN 10 AND 131 AND \"content_releases\".\"id\" GLOB 'rel_[a-z0-9]*' AND \"content_releases\".\"id\" NOT GLOB '*[^a-z0-9_-]*'"
+        },
+        "ck_content_release_hash": {
+          "name": "ck_content_release_hash",
+          "value": "length(\"content_releases\".\"manifest_sha256\") = 64 AND \"content_releases\".\"manifest_sha256\" NOT GLOB '*[^0-9a-f]*'"
+        },
+        "ck_content_release_state": {
+          "name": "ck_content_release_state",
+          "value": "\"content_releases\".\"state\" IN ('draft', 'validating', 'ready', 'published', 'superseded', 'withdrawn')"
+        },
+        "ck_content_release_published_at": {
+          "name": "ck_content_release_published_at",
+          "value": "(\"content_releases\".\"state\" IN ('published', 'superseded', 'withdrawn') AND \"content_releases\".\"published_at_ms\" IS NOT NULL) OR (\"content_releases\".\"state\" NOT IN ('published', 'superseded', 'withdrawn') AND \"content_releases\".\"published_at_ms\" IS NULL)"
+        }
+      }
+    },
+    "propulsion_models": {
+      "name": "propulsion_models",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "model_class": {
+          "name": "model_class",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "distance_definition": {
+          "name": "distance_definition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "definition_json": {
+          "name": "definition_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "evidence_class": {
+          "name": "evidence_class",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "citation_assertion_id": {
+          "name": "citation_assertion_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "uq_propulsion_code_version": {
+          "name": "uq_propulsion_code_version",
+          "columns": [
+            "code",
+            "version"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_propulsion_definition_json": {
+          "name": "ck_propulsion_definition_json",
+          "value": "json_valid(\"propulsion_models\".\"definition_json\")"
+        }
+      }
+    },
+    "route_legs": {
+      "name": "route_legs",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "route_id": {
+          "name": "route_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ordinal": {
+          "name": "ordinal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "from_waypoint_id": {
+          "name": "from_waypoint_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "to_waypoint_id": {
+          "name": "to_waypoint_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "propulsion_model_id": {
+          "name": "propulsion_model_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "distance_definition": {
+          "name": "distance_definition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "distance_lexical": {
+          "name": "distance_lexical",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "distance_unit": {
+          "name": "distance_unit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "duration_lexical": {
+          "name": "duration_lexical",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "duration_unit": {
+          "name": "duration_unit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "assumptions_json": {
+          "name": "assumptions_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "result_state": {
+          "name": "result_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "uq_route_leg_ordinal": {
+          "name": "uq_route_leg_ordinal",
+          "columns": [
+            "route_id",
+            "ordinal"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "route_legs_route_id_saved_routes_id_fk": {
+          "name": "route_legs_route_id_saved_routes_id_fk",
+          "tableFrom": "route_legs",
+          "tableTo": "saved_routes",
+          "columnsFrom": [
+            "route_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "route_legs_propulsion_model_id_propulsion_models_id_fk": {
+          "name": "route_legs_propulsion_model_id_propulsion_models_id_fk",
+          "tableFrom": "route_legs",
+          "tableTo": "propulsion_models",
+          "columnsFrom": [
+            "propulsion_model_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "fk_route_leg_from_waypoint_route": {
+          "name": "fk_route_leg_from_waypoint_route",
+          "tableFrom": "route_legs",
+          "tableTo": "route_waypoints",
+          "columnsFrom": [
+            "from_waypoint_id",
+            "route_id"
+          ],
+          "columnsTo": [
+            "id",
+            "route_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "fk_route_leg_to_waypoint_route": {
+          "name": "fk_route_leg_to_waypoint_route",
+          "tableFrom": "route_legs",
+          "tableTo": "route_waypoints",
+          "columnsFrom": [
+            "to_waypoint_id",
+            "route_id"
+          ],
+          "columnsTo": [
+            "id",
+            "route_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_route_leg_ordinal": {
+          "name": "ck_route_leg_ordinal",
+          "value": "\"route_legs\".\"ordinal\" >= 0"
+        },
+        "ck_route_leg_assumptions_json": {
+          "name": "ck_route_leg_assumptions_json",
+          "value": "json_valid(\"route_legs\".\"assumptions_json\")"
+        }
+      }
+    },
+    "route_waypoints": {
+      "name": "route_waypoints",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "route_id": {
+          "name": "route_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ordinal": {
+          "name": "ordinal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "navigation_target_id": {
+          "name": "navigation_target_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "arrival_scientific_time_json": {
+          "name": "arrival_scientific_time_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "departure_scientific_time_json": {
+          "name": "departure_scientific_time_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "uq_route_waypoint_ordinal": {
+          "name": "uq_route_waypoint_ordinal",
+          "columns": [
+            "route_id",
+            "ordinal"
+          ],
+          "isUnique": true
+        },
+        "uq_route_waypoint_id_route": {
+          "name": "uq_route_waypoint_id_route",
+          "columns": [
+            "id",
+            "route_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "route_waypoints_route_id_saved_routes_id_fk": {
+          "name": "route_waypoints_route_id_saved_routes_id_fk",
+          "tableFrom": "route_waypoints",
+          "tableTo": "saved_routes",
+          "columnsFrom": [
+            "route_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_route_waypoint_ordinal": {
+          "name": "ck_route_waypoint_ordinal",
+          "value": "\"route_waypoints\".\"ordinal\" >= 0"
+        },
+        "ck_route_waypoint_arrival_json": {
+          "name": "ck_route_waypoint_arrival_json",
+          "value": "\"route_waypoints\".\"arrival_scientific_time_json\" IS NULL OR json_valid(\"route_waypoints\".\"arrival_scientific_time_json\")"
+        },
+        "ck_route_waypoint_departure_json": {
+          "name": "ck_route_waypoint_departure_json",
+          "value": "\"route_waypoints\".\"departure_scientific_time_json\" IS NULL OR json_valid(\"route_waypoints\".\"departure_scientific_time_json\")"
+        }
+      }
+    },
+    "saved_routes": {
+      "name": "saved_routes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "visibility": {
+          "name": "visibility",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'private'"
+        },
+        "travel_mode": {
+          "name": "travel_mode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "spacecraft_id": {
+          "name": "spacecraft_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "origin_target_id": {
+          "name": "origin_target_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "destination_target_id": {
+          "name": "destination_target_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "assumptions_json": {
+          "name": "assumptions_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'saved'"
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {
+        "ix_saved_routes_user_updated": {
+          "name": "ix_saved_routes_user_updated",
+          "columns": [
+            "user_id",
+            "updated_at_ms"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "saved_routes_user_id_app_users_id_fk": {
+          "name": "saved_routes_user_id_app_users_id_fk",
+          "tableFrom": "saved_routes",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "saved_routes_spacecraft_id_user_spacecraft_id_fk": {
+          "name": "saved_routes_spacecraft_id_user_spacecraft_id_fk",
+          "tableFrom": "saved_routes",
+          "tableTo": "user_spacecraft",
+          "columnsFrom": [
+            "spacecraft_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "saved_routes_release_id_content_releases_id_fk": {
+          "name": "saved_routes_release_id_content_releases_id_fk",
+          "tableFrom": "saved_routes",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_saved_route_id": {
+          "name": "ck_saved_route_id",
+          "value": "\"saved_routes\".\"id\" GLOB 'route_*'"
+        },
+        "ck_saved_route_assumptions_json": {
+          "name": "ck_saved_route_assumptions_json",
+          "value": "json_valid(\"saved_routes\".\"assumptions_json\")"
+        },
+        "ck_saved_route_visibility": {
+          "name": "ck_saved_route_visibility",
+          "value": "\"saved_routes\".\"visibility\" IN ('private', 'unlisted', 'public')"
+        }
+      }
+    },
+    "user_discoveries": {
+      "name": "user_discoveries",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "entity_id": {
+          "name": "entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "first_seen_at_ms": {
+          "name": "first_seen_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "last_seen_at_ms": {
+          "name": "last_seen_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "visit_count": {
+          "name": "visit_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "discovery_method": {
+          "name": "discovery_method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ix_user_discoveries_recent": {
+          "name": "ix_user_discoveries_recent",
+          "columns": [
+            "user_id",
+            "last_seen_at_ms"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "user_discoveries_user_id_app_users_id_fk": {
+          "name": "user_discoveries_user_id_app_users_id_fk",
+          "tableFrom": "user_discoveries",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "user_discoveries_release_id_content_releases_id_fk": {
+          "name": "user_discoveries_release_id_content_releases_id_fk",
+          "tableFrom": "user_discoveries",
+          "tableTo": "content_releases",
+          "columnsFrom": [
+            "release_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_discoveries_user_id_entity_id_pk": {
+          "columns": [
+            "user_id",
+            "entity_id"
+          ],
+          "name": "user_discoveries_user_id_entity_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_user_discoveries_visit_count": {
+          "name": "ck_user_discoveries_visit_count",
+          "value": "\"user_discoveries\".\"visit_count\" > 0"
+        }
+      }
+    },
+    "user_preferences": {
+      "name": "user_preferences",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'en'"
+        },
+        "units_system": {
+          "name": "units_system",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'scientific'"
+        },
+        "accessibility_json": {
+          "name": "accessibility_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        },
+        "privacy_json": {
+          "name": "privacy_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_preferences_user_id_app_users_id_fk": {
+          "name": "user_preferences_user_id_app_users_id_fk",
+          "tableFrom": "user_preferences",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_user_preferences_accessibility_json": {
+          "name": "ck_user_preferences_accessibility_json",
+          "value": "json_valid(\"user_preferences\".\"accessibility_json\")"
+        },
+        "ck_user_preferences_privacy_json": {
+          "name": "ck_user_preferences_privacy_json",
+          "value": "json_valid(\"user_preferences\".\"privacy_json\")"
+        }
+      }
+    },
+    "user_progress": {
+      "name": "user_progress",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scope_entity_id": {
+          "name": "scope_entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metric_code": {
+          "name": "metric_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value_numeric": {
+          "name": "value_numeric",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "value_json": {
+          "name": "value_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_progress_user_id_app_users_id_fk": {
+          "name": "user_progress_user_id_app_users_id_fk",
+          "tableFrom": "user_progress",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_progress_user_id_scope_entity_id_metric_code_pk": {
+          "columns": [
+            "user_id",
+            "scope_entity_id",
+            "metric_code"
+          ],
+          "name": "user_progress_user_id_scope_entity_id_metric_code_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_user_progress_value_json": {
+          "name": "ck_user_progress_value_json",
+          "value": "\"user_progress\".\"value_json\" IS NULL OR json_valid(\"user_progress\".\"value_json\")"
+        }
+      }
+    },
+    "user_spacecraft": {
+      "name": "user_spacecraft",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "display_name": {
+          "name": "display_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "propulsion_model_id": {
+          "name": "propulsion_model_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cosmetics_json": {
+          "name": "cosmetics_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(unixepoch() * 1000)"
+        }
+      },
+      "indexes": {
+        "ix_user_spacecraft_owner": {
+          "name": "ix_user_spacecraft_owner",
+          "columns": [
+            "user_id",
+            "updated_at_ms"
+          ],
+          "isUnique": false
+        },
+        "uq_user_spacecraft_id_owner": {
+          "name": "uq_user_spacecraft_id_owner",
+          "columns": [
+            "id",
+            "user_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "user_spacecraft_user_id_app_users_id_fk": {
+          "name": "user_spacecraft_user_id_app_users_id_fk",
+          "tableFrom": "user_spacecraft",
+          "tableTo": "app_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "user_spacecraft_propulsion_model_id_propulsion_models_id_fk": {
+          "name": "user_spacecraft_propulsion_model_id_propulsion_models_id_fk",
+          "tableFrom": "user_spacecraft",
+          "tableTo": "propulsion_models",
+          "columnsFrom": [
+            "propulsion_model_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ck_user_spacecraft_id": {
+          "name": "ck_user_spacecraft_id",
+          "value": "\"user_spacecraft\".\"id\" GLOB 'ship_*'"
+        },
+        "ck_user_spacecraft_cosmetics_json": {
+          "name": "ck_user_spacecraft_cosmetics_json",
+          "value": "json_valid(\"user_spacecraft\".\"cosmetics_json\")"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

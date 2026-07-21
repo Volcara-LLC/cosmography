@@ -1,0 +1,40 @@
+# Secrets and local credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*.json
+secrets/
+
+# Temporary and generated local files
+*.log
+.cache/
+tmp/
+temp/
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+
+# Dependency and build output
+node_modules/
+dist/
+/build/
+
+# Scientific downloads and generated data products
+# Keep only small, reviewed fixtures or source manifests in Git.
+data/raw/
+data/downloads/
+data/cache/
+data/derived/
+storage/
+*.part
+*.zarr/
+
+# Editor and operating-system metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

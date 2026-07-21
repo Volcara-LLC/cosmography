@@ -1,0 +1,64 @@
+{
+  "format": "cosmography-foundation-coverage-manifest-v1",
+  "canonicalization": "cosmography-foundation-coverage-manifest-stable-json-v1",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-19T18:00:00Z",
+  "sourceReleaseIncludesCoverageProjection": false,
+  "coverageProjectionIsCompletenessClaim": false,
+  "warning": "This release-scoped Coverage Pack derivative summarizes frozen repository records only. It is non-authoritative, incomplete, and ineligible for runtime, rendering, publication, release, or activation authority.",
+  "authority": {
+    "sourceAuthenticityEstablished": false,
+    "scientificValidationEstablished": false,
+    "independentValidationEstablished": false,
+    "completenessEstablished": false,
+    "rightsClearanceEstablished": false,
+    "runtimeUseAllowed": false,
+    "renderAllowed": false,
+    "publicationAllowed": false,
+    "releaseEligible": false,
+    "activationAllowed": false
+  },
+  "releaseBinding": {
+    "releaseId": "rel_landing_atlas_v0_1_0",
+    "releaseGeneratedAt": "2026-07-19T00:00:00Z",
+    "releaseManifestSha256": "e1dc9decfb38fa4996a4fe163dd5eba2b8fc448bea7a9d717a1a4febb3cf5b0e",
+    "releaseContentSha256": "beeac15802d8ee504bef88607dcf06dcc052c72e9653ba3213eb0fc966d8ced3"
+  },
+  "coverageSet": {
+    "coverageSetId": "covset_foundation_coverage_v1",
+    "projectionVersion": "coverage-pack-v1",
+    "canonicalization": "cosmography-release-scoped-coverage-set-json-v1",
+    "sha256": "f35bd5eecaee0fce3923b4117f99112c75997720c9a8bb8346a4a6f52f974263",
+    "etag": "\"cpack-set-sha256-f35bd5eecaee0fce3923b4117f99112c75997720c9a8bb8346a4a6f52f974263\""
+  },
+  "packs": [
+    {
+      "coverageKey": "apollo-17",
+      "packId": "covp_apollo_17_foundation_v1",
+      "canonicalization": "cosmography-release-scoped-coverage-pack-json-v1",
+      "sha256": "53bf7715d565271ad4a3f982d344c09c40c9a7a62173b9c55c9af7f8881a8eb1",
+      "etag": "\"cpack-sha256-53bf7715d565271ad4a3f982d344c09c40c9a7a62173b9c55c9af7f8881a8eb1\""
+    },
+    {
+      "coverageKey": "earth-network",
+      "packId": "covp_earth_network_foundation_v1",
+      "canonicalization": "cosmography-release-scoped-coverage-pack-json-v1",
+      "sha256": "af1f14cd761de50bc9d3e8c3bd881b43bfdc9bde0844d1be6d3fc71ad1337dfd",
+      "etag": "\"cpack-sha256-af1f14cd761de50bc9d3e8c3bd881b43bfdc9bde0844d1be6d3fc71ad1337dfd\""
+    },
+    {
+      "coverageKey": "mars-jezero",
+      "packId": "covp_mars_jezero_foundation_v1",
+      "canonicalization": "cosmography-release-scoped-coverage-pack-json-v1",
+      "sha256": "4fd1c1030e220e34889b447218b3e75aa0d6b6984ae32ac5b8f9a324f33909f1",
+      "etag": "\"cpack-sha256-4fd1c1030e220e34889b447218b3e75aa0d6b6984ae32ac5b8f9a324f33909f1\""
+    },
+    {
+      "coverageKey": "voyager-1",
+      "packId": "covp_voyager_1_foundation_v1",
+      "canonicalization": "cosmography-release-scoped-coverage-pack-json-v1",
+      "sha256": "e517808b4a0dcc62854fc66626fe304b559b24e76449cf10ad61e9e250a5c30a",
+      "etag": "\"cpack-sha256-e517808b4a0dcc62854fc66626fe304b559b24e76449cf10ad61e9e250a5c30a\""
+    }
+  ]
+}

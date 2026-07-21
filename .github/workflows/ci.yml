@@ -1,0 +1,91 @@
+name: Cosmography CI
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Web application
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.19.0
+          cache: npm
+          cache-dependency-path: |
+            apps/web/package-lock.json
+            packages/scientific-model/package-lock.json
+            packages/relativity/package-lock.json
+      - name: Install linked scientific-model dependencies
+        run: npm ci
+        working-directory: packages/scientific-model
+      - name: Install linked relativity dependencies
+        run: npm ci
+        working-directory: packages/relativity
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build and test
+        run: npm test
+      - name: Audit all dependencies
+        run: npm audit --audit-level=high
+
+  scientific-packages:
+    name: ${{ matrix.label }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Scientific model
+            package: packages/scientific-model
+          - label: Relativity contracts
+            package: packages/relativity
+          - label: Data connectors
+            package: packages/connectors
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.19.0
+          cache: npm
+          cache-dependency-path: ${{ matrix.package }}/package-lock.json
+      - name: Install linked scientific-model dependencies
+        if: matrix.package == 'packages/connectors'
+        run: npm ci
+        working-directory: packages/scientific-model
+      - name: Install locked dependencies
+        run: npm ci
+        working-directory: ${{ matrix.package }}
+      - name: Typecheck and test
+        run: npm run check
+        working-directory: ${{ matrix.package }}
+      - name: Audit all dependencies
+        run: npm audit --audit-level=high
+        working-directory: ${{ matrix.package }}

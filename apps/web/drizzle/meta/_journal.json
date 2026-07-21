@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1784461290209,
+      "tag": "0000_lame_spot",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1784547212786,
+      "tag": "0001_durable_spacecraft_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1784566800000,
+      "tag": "0002_private_recorded_encounters_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1784566860000,
+      "tag": "0003_private_tour_resume_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1784566920000,
+      "tag": "0004_private_saved_places_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1784630818438,
+      "tag": "0005_judge_access_rate_limit",
+      "breakpoints": true
+    }
+  ]
+}

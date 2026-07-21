@@ -1,0 +1,387 @@
+.shell {
+  --mission-ink: #f1f5f1;
+  --mission-panel: rgba(255, 255, 255, 0.96);
+  --mission-panel-soft: #eaf1ef;
+  --mission-line: rgba(26, 62, 73, 0.17);
+  --mission-line-bright: rgba(20, 96, 119, 0.34);
+  --mission-cyan: #126680;
+  --mission-cyan-strong: #0b6b83;
+  --mission-amber: #895811;
+  --mission-violet: #5c4b91;
+  --text: #17313b;
+  --muted: #536b74;
+  background:
+    radial-gradient(circle at 78% 3%, rgba(54, 133, 161, 0.14), transparent 31rem),
+    radial-gradient(circle at 10% 31%, rgba(113, 91, 164, 0.08), transparent 29rem),
+    linear-gradient(180deg, #f8faf6, var(--mission-ink) 62%, #e9f0ed);
+  color: var(--text);
+  color-scheme: light;
+}
+
+.shell :global(:focus-visible) {
+  outline-color: var(--mission-cyan);
+}
+
+.shell::before,
+.shell::after {
+  display: none;
+}
+
+.shell :global(.mission-header) {
+  border-bottom-color: var(--mission-line);
+  background: rgba(249, 251, 248, 0.95);
+  box-shadow: 0 9px 28px rgba(22, 53, 63, 0.09);
+  color: var(--text);
+}
+
+.shell :global(.mission-brand-mark) {
+  border-color: rgba(18, 102, 128, 0.28);
+  background: #e3f1f3;
+  box-shadow: none;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-brand small),
+.shell :global(.mission-nav),
+.shell :global(.mission-super-title),
+.shell :global(.mission-legend) {
+  color: var(--muted);
+}
+
+.shell :global(.mission-nav a:hover) {
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-status-chip) {
+  color: #17654d;
+}
+
+.shell :global(.mission-status-chip > span) {
+  background: #238463;
+  box-shadow: 0 0 12px rgba(35, 132, 99, 0.3);
+}
+
+.shell :global(.mission-hero h1 em) {
+  -webkit-text-stroke-color: rgba(18, 102, 128, 0.74);
+  text-shadow: none;
+}
+
+.shell :global(.mission-dek),
+.shell :global(.mission-truth-card p),
+.shell :global(.mission-section-intro),
+.shell :global(.mission-event-panel > p),
+.shell :global(.mission-vector-distance span),
+.shell :global(.mission-vector-card > p),
+.shell :global(.mission-provenance-grid > article > p),
+.shell :global(.mission-instrument-card p),
+.shell :global(.mission-media-card p),
+.shell :global(.mission-role-grid p),
+.shell :global(.mission-source-list p),
+.shell :global(.mission-footer p) {
+  color: #506971;
+}
+
+.shell :global(.mission-hero-facts),
+.shell :global(.mission-trajectory-grid),
+.shell :global(.mission-provenance-grid),
+.shell :global(.mission-instrument-grid),
+.shell :global(.mission-media-grid),
+.shell :global(.mission-role-grid) {
+  border-color: var(--mission-line);
+  background: var(--mission-line);
+}
+
+.shell :global(.mission-hero-facts > div),
+.shell :global(.mission-truth-card),
+.shell :global(.mission-event-panel),
+.shell :global(.mission-time-console),
+.shell :global(.mission-vector-card),
+.shell :global(.mission-provenance-grid > article),
+.shell :global(.mission-instrument-card),
+.shell :global(.mission-media-card),
+.shell :global(.mission-role-grid article),
+.shell :global(.mission-source-ledger),
+.shell :global(.mission-footer) {
+  border-color: var(--mission-line);
+  background: var(--mission-panel);
+  color: var(--text);
+}
+
+.shell :global(.mission-truth-card) {
+  background:
+    linear-gradient(135deg, rgba(49, 137, 165, 0.08), transparent 45%),
+    white;
+  box-shadow: 0 24px 65px rgba(25, 62, 71, 0.12);
+}
+
+.shell :global(.mission-truth-icon),
+.shell :global(.mission-section-icon) {
+  border-color: rgba(18, 102, 128, 0.24);
+  background: #e7f2f3;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-verified) {
+  border-color: var(--mission-line);
+  color: #17654d;
+}
+
+.shell :global(.mission-explorer) {
+  border-color: var(--mission-line);
+  background: rgba(235, 242, 239, 0.72);
+}
+
+.shell :global(.mission-flight-deck) {
+  border-color: var(--mission-line-bright);
+  background: white;
+  box-shadow: 0 32px 90px rgba(25, 62, 71, 0.15);
+}
+
+.shell :global(.mission-space-stage) {
+  --mission-cyan: #8ee7ff;
+  --mission-cyan-strong: #38c7ef;
+  --mission-amber: #ffc77d;
+  --mission-violet: #b9a8ff;
+  --mission-line: rgba(153, 211, 231, 0.16);
+  --mission-line-bright: rgba(149, 222, 247, 0.38);
+  --text: #f0f7fa;
+  --muted: #94aab5;
+  border-color: var(--mission-line-bright);
+  color: var(--text);
+  color-scheme: dark;
+}
+
+.shell :global(.mission-event-panel) {
+  background: linear-gradient(180deg, rgba(245, 249, 247, 0.98), rgba(235, 242, 240, 0.98));
+}
+
+.shell :global(.mission-event-index small),
+.shell :global(.mission-event-panel time),
+.shell :global(.mission-event-sources small),
+.shell :global(.mission-time-controls label),
+.shell :global(.mission-chapter),
+.shell :global(.mission-card-topline),
+.shell :global(.mission-vector-list dt),
+.shell :global(.mission-kernel-list li > span),
+.shell :global(.mission-kernel-list small),
+.shell :global(.mission-media-card > small),
+.shell :global(.mission-rights-note),
+.shell :global(.mission-source-number) {
+  color: #5a737c;
+}
+
+.shell :global(.mission-event-panel .mission-event-summary),
+.shell :global(.mission-telemetry-distinction strong),
+.shell :global(.mission-vector-list dd),
+.shell :global(.mission-kernel-list code) {
+  color: #294750;
+}
+
+.shell :global(.mission-evidence) {
+  border-color: rgba(18, 102, 128, 0.25);
+  background: #e3f1f3;
+  color: #155a70;
+}
+
+.shell :global(.mission-evidence--institutional-record),
+.shell :global(.mission-media-admission),
+.shell :global(.mission-contract-state) {
+  border-color: rgba(137, 88, 17, 0.26);
+  background: #f8efd9;
+  color: #70470d;
+}
+
+.shell :global(.mission-evidence--scientific-inference),
+.shell :global(.mission-evidence--ephemeris-prediction),
+.shell :global(.mission-evidence--artist-interpretation) {
+  border-color: rgba(92, 75, 145, 0.26);
+  background: #eeeafb;
+  color: #514080;
+}
+
+.shell :global(.mission-evidence--processed-observation),
+.shell :global(.mission-media-admission--ready) {
+  border-color: rgba(29, 111, 83, 0.26);
+  background: #e3f3ec;
+  color: #176347;
+}
+
+.shell :global(.mission-accuracy-note) {
+  border-left-color: var(--mission-violet);
+  background: #eeeafb;
+  color: #514f67;
+}
+
+.shell :global(.mission-accuracy-note strong) {
+  color: #4f3f7c;
+}
+
+.shell :global(.mission-event-sources a) {
+  border-color: rgba(18, 102, 128, 0.18);
+  background: #eaf3f3;
+}
+
+.shell :global(.mission-time-console) {
+  background: rgba(249, 251, 249, 0.98);
+}
+
+.shell :global(.mission-time-controls),
+.shell :global(.mission-chapter-list li),
+.shell :global(.mission-data-section),
+.shell :global(.mission-source-list article),
+.shell :global(.mission-ledger-heading),
+.shell :global(.mission-footer) {
+  border-color: var(--mission-line);
+}
+
+.shell :global(.mission-time-controls > button) {
+  border-color: var(--mission-line-bright);
+  background: white;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-chapter:hover),
+.shell :global(.mission-chapter.is-active) {
+  background: #e3f0f2;
+  color: var(--text);
+}
+
+.shell :global(.mission-chapter.is-active > span) {
+  background: var(--mission-cyan);
+  box-shadow: none;
+}
+
+.shell :global(.mission-vector-card--current) {
+  background: linear-gradient(145deg, #e4f1f2, white 60%);
+}
+
+.shell :global(.mission-vector-card--future) {
+  background: linear-gradient(145deg, #eeeafb, white 62%);
+}
+
+.shell :global(.mission-telemetry-distinction) {
+  border-color: var(--mission-line);
+  background: #e8f1f0;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-telemetry-distinction p) {
+  color: #506971;
+}
+
+.shell :global(.mission-provenance-grid > article) {
+  background: linear-gradient(150deg, #edf4f2, white 58%);
+}
+
+.shell :global(.mission-contract-state--pending) {
+  border-color: rgba(18, 102, 128, 0.25);
+  background: #e3f1f3;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-provenance-grid .mission-contract-note) {
+  border-color: rgba(137, 88, 17, 0.2);
+  color: #76531c;
+}
+
+.shell :global(.mission-power.is-on) {
+  color: #176347;
+}
+
+.shell :global(.mission-power.is-off) {
+  color: #687a80;
+}
+
+.shell :global(.mission-media-card--direct-observation) {
+  background: linear-gradient(150deg, #e2f1f3, white 58%);
+}
+
+.shell :global(.mission-media-card--processed-observation) {
+  background: linear-gradient(150deg, #e3f3ec, white 58%);
+}
+
+.shell :global(.mission-media-card--artist-interpretation) {
+  background: linear-gradient(150deg, #eeeafb, white 58%);
+}
+
+.shell :global(.mission-media-orbit) {
+  border-color: rgba(18, 102, 128, 0.18);
+  background: #eef5f4;
+  color: var(--mission-cyan);
+}
+
+.shell :global(.mission-source-ledger) {
+  background: linear-gradient(180deg, #edf4f1, #f8faf7);
+}
+
+.shell :global(.mission-source-list .mission-source-caveat) {
+  color: #66558c;
+}
+
+.shell :global(.mission-source-list > article > a) {
+  border-color: var(--mission-line-bright);
+  background: white;
+}
+
+.shell :global(.mission-source-list > article > a:hover) {
+  border-color: var(--mission-cyan);
+  background: #e3f1f3;
+}
+
+.shell :global(.mission-footer) {
+  background: #f8faf7;
+}
+
+.shell :global(.mission-event-index small),
+.shell :global(.mission-event-sources small),
+.shell :global(.mission-time-controls label),
+.shell :global(.mission-chapter small),
+.shell :global(.mission-card-topline),
+.shell :global(.mission-vector-list dt),
+.shell :global(.mission-kernel-list li > span),
+.shell :global(.mission-kernel-list small),
+.shell :global(.mission-power),
+.shell :global(.mission-media-card > small),
+.shell :global(.mission-rights-note),
+.shell :global(.mission-role-grid small),
+.shell :global(.mission-source-number),
+.shell :global(.mission-source-list small) {
+  font-size: max(0.75rem, 12px);
+}
+
+.shell :global(.mission-vector-card > p),
+.shell :global(.mission-telemetry-distinction p),
+.shell :global(.mission-provenance-grid > article > p),
+.shell :global(.mission-instrument-card p),
+.shell :global(.mission-media-card p),
+.shell :global(.mission-role-grid p),
+.shell :global(.mission-source-list p) {
+  font-size: max(0.875rem, 14px);
+}
+
+.shell :global(.mission-vector-distance span) {
+  font-size: max(0.75rem, 12px);
+}
+
+@media (prefers-contrast: more) {
+  .shell :global(.mission-header),
+  .shell :global(.mission-hero-facts > div),
+  .shell :global(.mission-truth-card),
+  .shell :global(.mission-event-panel),
+  .shell :global(.mission-time-console),
+  .shell :global(.mission-vector-card),
+  .shell :global(.mission-provenance-grid > article),
+  .shell :global(.mission-instrument-card),
+  .shell :global(.mission-media-card),
+  .shell :global(.mission-role-grid article),
+  .shell :global(.mission-source-ledger),
+  .shell :global(.mission-footer) {
+    border-color: rgba(18, 49, 59, 0.5);
+    background: white;
+    box-shadow: none;
+  }
+
+  .shell :global(.mission-space-stage) {
+    background-color: #020507;
+  }
+}

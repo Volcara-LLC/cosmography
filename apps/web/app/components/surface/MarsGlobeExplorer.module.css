@@ -1,0 +1,455 @@
+.explorer {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(600px, 76vh, 860px);
+  margin: 0 auto 1rem;
+  border: 1px solid rgba(236, 166, 125, 0.25);
+  background:
+    radial-gradient(circle at 70% 24%, rgba(132, 61, 37, 0.24), transparent 28%),
+    #030508;
+  color: #fff7f1;
+  color-scheme: dark;
+  isolation: isolate;
+}
+
+.embedded {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  margin: 0;
+  border: 0;
+}
+
+.embedded .identity,
+.embedded .truthCard,
+.embedded .instructions {
+  display: none;
+}
+
+.embedded .placeCard {
+  top: calc(var(--header-height) + 4.6rem);
+  right: clamp(5.8rem, 7vw, 7.4rem);
+  bottom: auto;
+  left: auto;
+  width: min(330px, calc(100% - 9rem));
+}
+
+.embedded .controls {
+  right: clamp(5.8rem, 7vw, 7.4rem);
+  transform: translateY(5.5rem);
+}
+
+.explorer::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 4, 7, 0.42), transparent 25%, transparent 66%, rgba(2, 4, 7, 0.7)),
+    radial-gradient(circle at center, transparent 50%, rgba(1, 3, 5, 0.42));
+  content: "";
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.canvas:focus-visible {
+  outline: 3px solid #8ae3ff;
+  outline-offset: -4px;
+}
+
+.identity,
+.truthCard,
+.placeCard,
+.instructions,
+.controls {
+  position: absolute;
+  z-index: 4;
+}
+
+.identity {
+  top: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  max-width: min(440px, calc(100% - 7rem));
+}
+
+.eyebrow,
+.truthLabel,
+.placeType,
+.availability {
+  margin: 0;
+  color: #f4ae86;
+  font: 0.72rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.identity h2 {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 5.3rem);
+  font-weight: 390;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.identity p:last-child {
+  max-width: 38rem;
+  margin: 0.75rem 0 0;
+  color: #d6c3ba;
+  font-size: max(0.875rem, 14px);
+  line-height: 1.55;
+}
+
+.truthCard {
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  max-width: 260px;
+  gap: 0.25rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(130, 211, 237, 0.3);
+  background: rgba(4, 12, 17, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.truthLabel {
+  color: #9de5f8;
+}
+
+.truthCard strong {
+  font-size: max(0.875rem, 14px);
+}
+
+.truthCard span:last-child {
+  color: #b7c9ce;
+  font-size: max(0.75rem, 12px);
+  line-height: 1.4;
+}
+
+.markerLayer {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #fff7f1;
+  font: 0.72rem var(--font-mono);
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.marker:hover .markerText,
+.marker[data-selected="true"] .markerText {
+  border-color: #ffb68d;
+  background: rgba(92, 39, 24, 0.9);
+}
+
+.marker:focus-visible,
+.controls button:focus-visible,
+.surfaceAction:focus-visible {
+  outline: 3px solid #8ae3ff;
+  outline-offset: 2px;
+}
+
+.markerDot {
+  position: relative;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 191, 153, 0.55);
+  border-radius: 50%;
+  background: #3b1d15;
+  color: #ffd4ba;
+  box-shadow: 0 0 0 3px rgba(5, 3, 3, 0.7), 0 5px 18px rgba(0, 0, 0, 0.34);
+}
+
+.marker[data-surface="true"] .markerDot::before {
+  position: absolute;
+  top: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #9ceaff;
+  box-shadow: 0 0 10px #77dffb;
+  content: "";
+}
+
+.markerText {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.2rem);
+  display: grid;
+  min-height: 34px;
+  align-content: center;
+  gap: 0.08rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(255, 210, 180, 0.34);
+  border-radius: 0.35rem;
+  background: rgba(10, 7, 7, 0.82);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  text-align: left;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  backdrop-filter: blur(10px);
+}
+
+.markerText::before {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 0.45rem;
+  height: 1px;
+  background: rgba(255, 210, 180, 0.7);
+  content: "";
+}
+
+.marker[data-label-side="left"] .markerText {
+  right: calc(100% + 0.2rem);
+  left: auto;
+  text-align: right;
+}
+
+.marker[data-label-side="left"] .markerText::before {
+  right: auto;
+  left: 100%;
+}
+
+.markerText small {
+  color: #f3b591;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.placeCard {
+  bottom: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  width: min(420px, calc(100% - 2rem));
+  padding: 1rem;
+  border: 1px solid rgba(241, 176, 139, 0.3);
+  background: rgba(11, 8, 8, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(14px);
+}
+
+.placeCard h3 {
+  margin: 0.28rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 420;
+}
+
+.coordinates,
+.placeKind,
+.sourceLink {
+  display: block;
+  color: #c7b5ad;
+  font-size: max(0.75rem, 12px);
+  line-height: 1.45;
+}
+
+.coordinates {
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+}
+
+.placeKind {
+  margin-top: 0.25rem;
+}
+
+.extentDisclosure {
+  display: block;
+  margin-top: 0.45rem;
+  color: #9de5f8;
+  font-size: max(0.7rem, 12px);
+  line-height: 1.4;
+}
+
+.availability {
+  margin-top: 0.7rem;
+  color: #9de5f8;
+  letter-spacing: 0.08em;
+}
+
+.sourceLink {
+  width: fit-content;
+  margin-top: 0.65rem;
+  color: #f4b18a;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.surfaceAction {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #f7b28a;
+  background: #b85334;
+  color: white;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.instructions {
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  max-width: 285px;
+  color: #c7b7b0;
+  font-size: max(0.75rem, 12px);
+  line-height: 1.5;
+  text-align: right;
+}
+
+.controls {
+  top: 50%;
+  right: clamp(0.75rem, 2vw, 1.35rem);
+  display: grid;
+  gap: 0.4rem;
+  transform: translateY(-50%);
+}
+
+.controls button {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(242, 190, 158, 0.34);
+  border-radius: 50%;
+  background: rgba(13, 9, 8, 0.84);
+  color: white;
+  font: 1rem var(--font-mono);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.controls button:hover:not(:disabled) {
+  border-color: #f7b28a;
+  background: #5f2c1f;
+}
+
+.controls button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.loading,
+.error {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(241, 176, 139, 0.3);
+  background: rgba(8, 7, 8, 0.88);
+  color: #f3d9cc;
+  font-size: max(0.875rem, 14px);
+  transform: translate(-50%, -50%);
+}
+
+.error {
+  border-color: rgba(255, 145, 132, 0.65);
+}
+
+@media (max-width: 760px) {
+  .explorer {
+    min-height: 720px;
+  }
+
+  .truthCard {
+    top: 8.25rem;
+    right: auto;
+    bottom: auto;
+    left: 1rem;
+    max-width: min(230px, calc(100% - 6rem));
+  }
+
+  .identity {
+    max-width: calc(100% - 5.5rem);
+  }
+
+  .identity p:last-child,
+  .instructions {
+    display: none;
+  }
+
+  .placeCard {
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    width: auto;
+  }
+
+  .markerText small {
+    display: none;
+  }
+
+  .controls {
+    top: 8.5rem;
+    transform: none;
+  }
+
+  .embedded .placeCard {
+    top: calc(var(--header-height) + 8.6rem);
+    right: 1rem;
+    bottom: auto;
+    left: 1rem;
+    width: auto;
+  }
+
+  .embedded .controls {
+    top: calc(var(--header-height) + 1rem);
+    right: 1rem;
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .markerText {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker,
+  .canvas {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .explorer,
+  .truthCard,
+  .placeCard,
+  .marker,
+  .controls button {
+    border: 1px solid CanvasText;
+  }
+}

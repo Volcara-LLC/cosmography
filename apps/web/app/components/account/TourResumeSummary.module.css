@@ -1,0 +1,202 @@
+.section {
+  --tour-summary-ink: #17343e;
+  --tour-summary-muted: #4d626a;
+  --tour-summary-quiet: #53676e;
+  --tour-summary-accent: #17647d;
+  margin-top: 1.1rem;
+  padding: clamp(1rem, 2.8vw, 1.5rem);
+  border: 1px solid rgba(28, 83, 94, 0.18);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(99, 181, 190, 0.16), transparent 32%),
+    linear-gradient(145deg, #fbfcf8, #edf6f3);
+  box-shadow: 0 18px 48px rgba(36, 68, 75, 0.09);
+  color: var(--tour-summary-ink);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+}
+
+.icon {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(23, 100, 125, 0.24);
+  border-radius: 50%;
+  background: white;
+  color: var(--tour-summary-accent);
+}
+
+.kicker {
+  color: var(--tour-summary-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin: 0.12rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.boundary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.58rem;
+  margin-top: 0.9rem;
+  padding: 0.72rem;
+  border-left: 3px solid var(--tour-summary-accent);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.boundary svg {
+  margin-top: 0.12rem;
+  color: var(--tour-summary-accent);
+}
+
+.boundary p,
+.record p {
+  margin: 0;
+  color: var(--tour-summary-muted);
+  font-size: 0.82rem;
+  line-height: 1.58;
+}
+
+.state,
+.emptyState,
+.record {
+  margin-top: 0.82rem;
+  border: 1px solid rgba(28, 83, 94, 0.17);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.state {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+  padding: 0.7rem 0.8rem;
+  color: var(--tour-summary-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.state > svg {
+  color: var(--tour-summary-accent);
+}
+
+.emptyState,
+.record {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.86rem;
+}
+
+.emptyState > div,
+.record > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.emptyState strong,
+.record h3 {
+  margin: 0;
+  color: var(--tour-summary-ink);
+  font-size: 0.96rem;
+  line-height: 1.35;
+}
+
+.emptyState span,
+.record > div > span {
+  color: var(--tour-summary-quiet);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.record > div > span {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.section a,
+.section button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  padding: 0.62rem 0.76rem;
+  border: 1px solid var(--tour-summary-accent);
+  border-radius: 9px;
+  background: white;
+  color: var(--tour-summary-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.record a {
+  flex: 0 0 auto;
+  background: var(--tour-summary-accent);
+  color: white;
+}
+
+.section a:focus-visible,
+.section button:focus-visible,
+.section [tabindex="-1"]:focus {
+  outline: 3px solid var(--tour-summary-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .emptyState,
+  .record {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .section a,
+  .section button {
+    width: 100%;
+  }
+}
+
+@media (forced-colors: active) {
+  .section,
+  .icon,
+  .state,
+  .emptyState,
+  .record,
+  .section a,
+  .section button {
+    border-color: CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section *,
+  .section *::before,
+  .section *::after {
+    scroll-behavior: auto !important;
+  }
+}

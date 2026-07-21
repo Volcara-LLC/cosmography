@@ -1,0 +1,544 @@
+.layer {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.anchor {
+  --label-accent: #86ddff;
+
+  position: absolute;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #f5fbfd;
+  border-radius: 50%;
+  background: var(--label-accent);
+  box-shadow: 0 0 0 3px #02050b, 0 0 14px var(--label-accent);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.label {
+  --label-accent: #86ddff;
+
+  position: absolute;
+  display: grid;
+  min-width: 44px;
+  min-height: 44px;
+  grid-template-columns: 8px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.48rem 0.62rem;
+  border: 1px solid #526b76;
+  border-left: 3px solid var(--label-accent);
+  border-radius: 9px;
+  background: #071117;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34);
+  color: #f5fbfd;
+  cursor: pointer;
+  pointer-events: auto;
+  text-align: left;
+  text-shadow: none;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.label:hover,
+.label[aria-current="location"] {
+  border-color: #b9dce9;
+  border-left-color: var(--label-accent);
+  background: #0c1b23;
+}
+
+.label::before {
+  position: absolute;
+  background: color-mix(in srgb, var(--label-accent) 68%, #dcecf2);
+  content: "";
+  pointer-events: none;
+}
+
+.label[data-label-placement="right"]::before {
+  top: 50%;
+  left: -13px;
+  width: 12px;
+  height: 1px;
+}
+
+.label[data-label-placement="left"]::before {
+  top: 50%;
+  right: -13px;
+  width: 12px;
+  height: 1px;
+}
+
+.label[data-label-placement="above"]::before {
+  bottom: -13px;
+  left: 50%;
+  width: 1px;
+  height: 12px;
+}
+
+.label[data-label-placement="below"]::before {
+  top: -13px;
+  left: 50%;
+  width: 1px;
+  height: 12px;
+}
+
+.label:focus-visible {
+  z-index: 2;
+  outline: 3px solid #86ddff;
+  outline-offset: 2px;
+}
+
+.label:disabled {
+  cursor: default;
+  opacity: 0.76;
+}
+
+.marker {
+  width: 8px;
+  height: 8px;
+  border: 2px solid #f5fbfd;
+  border-radius: 50%;
+  background: var(--label-accent);
+  box-shadow: 0 0 0 2px #071117, 0 0 12px var(--label-accent);
+}
+
+.copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.primary {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 680;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.designation,
+.detail {
+  overflow: hidden;
+  color: #d2e2e8;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.designation {
+  color: #f0dcb9;
+}
+
+.fullView .label {
+  border-color: #69838e;
+  border-left-color: var(--label-accent);
+  background: #050d12;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.48);
+}
+
+.fallback {
+  position: absolute;
+  z-index: 2;
+  top: clamp(10rem, 19vh, 12rem);
+  right: clamp(5.7rem, 8vw, 8rem);
+  width: min(22rem, calc(100% - 2rem));
+  max-height: min(34rem, calc(100% - 10rem));
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid #6d8792;
+  border-radius: 14px;
+  background: #071117;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  color: #f5fbfd;
+  pointer-events: auto;
+}
+
+.fallbackHeader h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.fallbackHeader p {
+  margin: 0.42rem 0 0;
+  color: #d2e2e8;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.fallbackList {
+  display: grid;
+  gap: 0.42rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fallbackList button {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.62rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #526b76;
+  border-radius: 9px;
+  background: #0b1920;
+  color: #f5fbfd;
+  cursor: pointer;
+  text-align: left;
+}
+
+.fallbackList button:hover,
+.fallbackList button[aria-current="location"] {
+  border-color: #b9dce9;
+  background: #10252f;
+}
+
+.fallbackList button:focus-visible {
+  outline: 3px solid #86ddff;
+  outline-offset: 2px;
+}
+
+.fallbackList button:disabled {
+  cursor: default;
+  opacity: 0.76;
+}
+
+.fallbackSwatch {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border: 2px solid #f5fbfd;
+  border-radius: 50%;
+  background: var(--label-accent);
+}
+
+.fallbackCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.fallbackFullView {
+  top: auto;
+  right: auto;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: max(1rem, env(safe-area-inset-left));
+  width: min(21rem, calc(100% - 2rem));
+  max-height: min(46vh, 25rem);
+}
+
+.emptyFallback {
+  max-height: min(26rem, calc(100% - 2rem));
+}
+
+.compactFallback,
+.compactSummary,
+.compactDisclosureBody,
+.compactSummaryCopy,
+.compactDisclosureIcon {
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px),
+  (min-width: 1025px) and (max-height: 700px) {
+  .fallbackLayer {
+    z-index: 19;
+  }
+
+  .label {
+    max-width: min(12rem, 52vw);
+    padding: 0.42rem 0.5rem;
+  }
+
+  .detail {
+    display: none;
+  }
+
+  .fallback:not(.fallbackFullView) {
+    top: calc(var(--header-height) + 8rem);
+    right: 0.75rem;
+    bottom: auto;
+    left: 0.75rem;
+    width: auto;
+    max-height: clamp(
+      7.5rem,
+      calc(
+        100% - var(--header-height) - 8rem - clamp(23.75rem, 51vh, 26.875rem)
+      ),
+      10rem
+    );
+    overflow: auto;
+    padding: 0.625rem;
+  }
+
+  .fallback:not(.fallbackFullView):not(.compactFallback) {
+    visibility: hidden;
+  }
+
+  .fallback.compactFallback {
+    max-height: 44px;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .fallback.compactFallback[open] {
+    max-height: min(18rem, calc(100% - var(--header-height) - 8.75rem));
+    overflow: auto;
+    border: 1px solid #6d8792;
+    background: #071117;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  }
+
+  .compactSummary {
+    display: grid;
+    min-height: 44px;
+    grid-template-columns: 10px minmax(0, 1fr) 28px;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.34rem 0.42rem 0.34rem 0.62rem;
+    border: 1px solid #6d8792;
+    border-radius: 11px;
+    background: #071117;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34);
+    color: #f5fbfd;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .compactFallback[open] .compactSummary {
+    border: 0;
+    border-bottom: 1px solid #526b76;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .compactSummary::-webkit-details-marker {
+    display: none;
+  }
+
+  .compactSummary:focus-visible {
+    outline: 3px solid #86ddff;
+    outline-offset: 2px;
+  }
+
+  .compactSummaryCopy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .compactSummaryCopy strong,
+  .compactSummaryCopy span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .compactSummaryCopy strong {
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .compactSummaryCopy span {
+    color: #d2e2e8;
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .compactDisclosureIcon {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid #6d8792;
+    border-radius: 50%;
+    color: #f5fbfd;
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 120ms ease;
+  }
+
+  .compactFallback[open] .compactDisclosureIcon {
+    transform: rotate(45deg);
+  }
+
+  .compactDisclosureBody {
+    padding: 0.625rem;
+  }
+
+  .fallbackFullView {
+    top: auto;
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    left: 0.75rem;
+    width: auto;
+    max-height: min(44vh, 23rem);
+  }
+
+  .fallbackHeader h2 {
+    font-size: 0.9375rem;
+  }
+
+  .fallbackHeader p {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .fallbackList {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0.38rem;
+    margin-top: 0.42rem;
+    padding: 0 0 0.2rem;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 1px;
+    scroll-snap-type: x proximity;
+    scrollbar-color: #6d8792 transparent;
+    scrollbar-width: thin;
+  }
+
+  .fallbackList li {
+    min-width: 0;
+    flex: 0 0 min(10.25rem, calc(50vw - 1.5rem));
+    scroll-snap-align: start;
+  }
+
+  .fallbackList button {
+    min-height: 52px;
+    padding: 0.42rem 0.5rem;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) and (min-height: 761px) {
+  .fallback:not(.fallbackFullView) {
+    top: 10rem;
+    right: 7rem;
+    bottom: auto;
+    left: auto;
+    width: min(22rem, calc(100% - 15rem));
+  }
+}
+
+@media (min-width: 560px) and (max-width: 1024px) and (max-height: 760px),
+  (min-width: 1025px) and (max-height: 700px) {
+  .fallback:not(.fallbackFullView) {
+    top: 8rem;
+    right: 7rem;
+    bottom: auto;
+    left: auto;
+    width: min(22rem, calc(55vw - 8rem));
+    max-height: calc(100% - 8.75rem);
+  }
+
+  .fallbackList li {
+    flex-basis: calc(50% - 0.19rem);
+  }
+
+  .fallback.compactFallback:not([open]) {
+    max-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label,
+  .fallbackList button,
+  .compactDisclosureIcon {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .label,
+  .fullView .label,
+  .fallback,
+  .fallbackList button,
+  .compactSummary {
+    border-color: #d8edf5;
+    background: #02080c;
+    box-shadow: none;
+  }
+
+  .primary,
+  .designation,
+  .detail,
+  .fallbackHeader p,
+  .compactSummaryCopy strong,
+  .compactSummaryCopy span {
+    color: #ffffff;
+  }
+
+  .fallback.compactFallback[open] {
+    border-color: #d8edf5;
+    background: #02080c;
+    box-shadow: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .label,
+  .fullView .label,
+  .fallback,
+  .fallbackList button,
+  .compactSummary {
+    border: 1px solid ButtonText;
+    background: Canvas;
+    box-shadow: none;
+    color: CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  .label[aria-current="location"],
+  .fallbackList button[aria-current="location"],
+  .compactSummary[aria-current="location"] {
+    border: 3px solid Highlight;
+  }
+
+  .marker,
+  .anchor,
+  .fallbackSwatch {
+    border-color: CanvasText;
+    background: Highlight;
+    box-shadow: none;
+  }
+
+  .primary,
+  .designation,
+  .detail,
+  .fallbackHeader h2,
+  .fallbackHeader p,
+  .compactSummaryCopy strong,
+  .compactSummaryCopy span,
+  .compactDisclosureIcon {
+    color: CanvasText;
+  }
+
+  .fallback.compactFallback[open] {
+    border-color: ButtonText;
+    background: Canvas;
+    box-shadow: none;
+  }
+
+  .compactDisclosureIcon {
+    border-color: ButtonText;
+  }
+}

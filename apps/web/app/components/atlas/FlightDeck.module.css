@@ -1,0 +1,484 @@
+.deck {
+  min-width: 0;
+  padding-top: 0.9rem;
+  color: var(--ui-text, #17313b);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.endpoints {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.82rem;
+  border: 1px solid var(--ui-control-line, #718087);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.endpoints > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.endpoints strong {
+  overflow: hidden;
+  font-size: 0.8rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.endpoints > div > span:last-child {
+  overflow: hidden;
+  color: var(--ui-muted, #4d6670);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.microLabel,
+.modeFieldset legend {
+  color: var(--ui-quiet, #526870);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.routeLine {
+  position: relative;
+  height: 1px;
+  background: color-mix(in srgb, var(--focus-accent) 45%, white);
+}
+
+.routeLine::after {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid var(--focus-accent-strong);
+  border-right: 2px solid var(--focus-accent-strong);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.modeFieldset {
+  min-width: 0;
+  margin: 1rem 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.modeFieldset legend {
+  margin-bottom: 0.55rem;
+}
+
+.modeList {
+  display: grid;
+  gap: 0.52rem;
+}
+
+.modeCard {
+  --truth-color: #326b7c;
+
+  display: flex;
+  min-width: 0;
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 0.68rem;
+  padding: 0.72rem;
+  border: 1px solid var(--ui-control-line, #718087);
+  border-left: 4px solid var(--truth-color);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ui-text, #17313b);
+  cursor: pointer;
+}
+
+.modeCard[data-truth-class="navigation"] {
+  --truth-color: #276d87;
+}
+
+.modeCard[data-truth-class="physical-limit"] {
+  --truth-color: #257053;
+}
+
+.modeCard[data-truth-class="historical-comparison"] {
+  --truth-color: #8a5a17;
+}
+
+.modeCard[data-truth-class="hypothetical-physical"] {
+  --truth-color: #67539a;
+}
+
+.modeCard[data-truth-class="fictional-only"] {
+  --truth-color: #9a4352;
+}
+
+.modeCard:hover,
+.modeCardActive {
+  border-color: var(--truth-color);
+  background: color-mix(in srgb, var(--truth-color) 8%, white);
+}
+
+.modeCard:focus-within {
+  outline: 2px solid var(--focus-accent-strong);
+  outline-offset: 2px;
+}
+
+.modeCard input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin: 0.12rem 0 0;
+  accent-color: var(--truth-color);
+}
+
+.modeCopy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.42rem;
+}
+
+.modeHeading {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+.modeHeading strong {
+  font-size: 0.8rem;
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.truthBadge {
+  flex: 0 0 auto;
+  padding: 0.14rem 0.38rem;
+  border: 1px solid color-mix(in srgb, var(--truth-color) 52%, white);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--truth-color) 9%, white);
+  color: var(--truth-color);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.disclosure {
+  color: var(--ui-muted, #4d6670);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.result {
+  display: block;
+  margin-top: 0.9rem;
+  padding: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--focus-accent) 35%, white);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--focus-accent-soft), rgba(255, 255, 255, 0.9));
+}
+
+.result h3 {
+  margin: 0.34rem 0 0;
+  color: var(--ui-text, #17313b);
+  font-size: 0.82rem;
+  font-weight: 680;
+}
+
+.result > strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 560;
+  line-height: 1.15;
+}
+
+.resultClass {
+  display: block;
+  margin-top: 0.34rem;
+  color: var(--focus-accent-strong);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.result p {
+  margin: 0.58rem 0 0;
+  color: var(--ui-muted, #4d6670);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.resultFlags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+}
+
+.resultFlags span {
+  padding: 0.22rem 0.42rem;
+  border: 1px solid var(--ui-line, rgba(25, 55, 67, 0.18));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ui-text, #17313b);
+  font-size: 0.75rem;
+}
+
+.details {
+  margin-top: 0.75rem;
+  border: 1px solid var(--ui-control-line, #718087);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.details summary {
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0.62rem 0.75rem;
+  color: var(--ui-text, #17313b);
+  font-size: 0.78rem;
+  font-weight: 680;
+  cursor: pointer;
+}
+
+.details summary::marker {
+  color: var(--focus-accent-strong);
+}
+
+.detailsBody {
+  display: grid;
+  gap: 1rem;
+  padding: 0 0.75rem 0.8rem;
+  border-top: 1px solid var(--ui-line, rgba(25, 55, 67, 0.18));
+}
+
+.assumptions {
+  margin: 0;
+}
+
+.assumptions > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 1fr);
+  gap: 0.6rem;
+  padding: 0.58rem 0;
+  border-bottom: 1px solid var(--ui-line, rgba(25, 55, 67, 0.18));
+}
+
+.assumptions dt,
+.assumptions dd {
+  min-width: 0;
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.assumptions dt {
+  color: var(--ui-quiet, #526870);
+  font-weight: 650;
+}
+
+.assumptions dd {
+  color: var(--ui-text, #17313b);
+}
+
+.codeValue {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.codeValue + .codeValue {
+  margin-top: 0.32rem;
+}
+
+.voyagerReference,
+.destinationSources {
+  min-width: 0;
+}
+
+.voyagerReference h3,
+.destinationSources h3 {
+  margin: 0;
+  color: var(--ui-text, #17313b);
+  font-size: 0.82rem;
+}
+
+.voyagerReference p,
+.destinationSources p,
+.lineageNote {
+  margin: 0.58rem 0 0;
+  color: var(--ui-muted, #4d6670);
+  font-size: 0.75rem;
+}
+
+.lineageNote {
+  padding: 0.68rem;
+  border: 1px solid var(--ui-line, rgba(25, 55, 67, 0.18));
+  border-radius: 8px;
+  background: var(--ui-surface-soft, #edf3f1);
+}
+
+.voyagerReference a,
+.destinationSources a {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.58rem;
+  padding: 0.58rem 0.64rem;
+  border: 1px solid var(--ui-control-line, #718087);
+  border-radius: 8px;
+  background: white;
+  color: var(--focus-accent-strong);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.voyagerReference a:hover,
+.destinationSources a:hover {
+  border-color: var(--focus-accent);
+  background: var(--focus-accent-soft);
+}
+
+.voyagerReference a svg,
+.destinationSources a svg {
+  flex: 0 0 auto;
+}
+
+.destinationSources ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.destinationSources li + li {
+  margin-top: 0.42rem;
+}
+
+.destinationSources a > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.16rem;
+}
+
+.destinationSources a strong,
+.destinationSources a span span {
+  font-size: 0.75rem;
+}
+
+.destinationSources a span span {
+  color: var(--ui-muted, #4d6670);
+}
+
+.missingSource {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 0.58rem;
+  padding: 0.58rem 0.64rem;
+  border: 1px solid var(--ui-line, rgba(25, 55, 67, 0.18));
+  border-radius: 8px;
+  color: var(--ui-muted, #4d6670);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.actions {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.78rem;
+}
+
+.recenterButton,
+.saveButton {
+  display: inline-flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  padding: 0.64rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 680;
+  cursor: pointer;
+}
+
+.recenterButton {
+  border: 1px solid var(--focus-accent-strong);
+  background: var(--focus-accent-strong);
+  color: white;
+}
+
+.recenterButton:hover {
+  border-color: var(--focus-accent);
+  background: var(--focus-accent-soft);
+  color: var(--focus-accent-strong);
+}
+
+.saveButton {
+  border: 1px solid var(--ui-control-line, #718087);
+  background: white;
+  color: var(--ui-text, #17313b);
+}
+
+.saveButton:hover:not(:disabled) {
+  border-color: var(--focus-accent);
+  background: var(--focus-accent-soft);
+  color: var(--focus-accent-strong);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.transitionNote {
+  margin: 0;
+  color: var(--ui-muted, #4d6670);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .modeHeading {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .truthBadge {
+    align-self: flex-start;
+  }
+
+  .assumptions > div {
+    grid-template-columns: 1fr;
+    gap: 0.22rem;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .endpoints,
+  .modeCard,
+  .result,
+  .details,
+  .saveButton {
+    border-color: currentColor;
+  }
+}

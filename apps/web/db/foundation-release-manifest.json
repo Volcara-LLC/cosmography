@@ -1,0 +1,23 @@
+{
+  "releaseId": "rel_landing_atlas_v0_1_0",
+  "version": "landing-atlas-v0.1.0",
+  "schemaVersion": "0.1.0",
+  "representation": "embedded-foundation-fixture",
+  "sourcePath": "app/data/atlas.ts",
+  "generatedAt": "2026-07-19T00:00:00Z",
+  "status": "foundation",
+  "content": {
+    "canonicalization": "cosmography-navigation-bundle-json-v1",
+    "sha256": "beeac15802d8ee504bef88607dcf06dcc052c72e9653ba3213eb0fc966d8ced3"
+  },
+  "derivatives": {
+    "registryProjectionVersion": "foundation-navigation-registry-v1",
+    "searchRankerVersion": "foundation-search-ranker-v1"
+  },
+  "counts": {
+    "entities": 15,
+    "sources": 9,
+    "agencies": 13
+  },
+  "warning": "This seed pins the small embedded navigation fixture; it is not a complete scientific catalog release."
+}

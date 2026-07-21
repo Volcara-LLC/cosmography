@@ -1,0 +1,185 @@
+.card {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  background: rgba(238, 246, 243, 0.82);
+  color: var(--ui-text);
+}
+
+.heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: var(--focus-accent-strong);
+}
+
+.heading > div {
+  min-width: 0;
+}
+
+.heading span {
+  display: block;
+  font: 650 0.75rem var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.heading h3 {
+  margin: 0.28rem 0 0;
+  color: var(--ui-text);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 440;
+  letter-spacing: -0.025em;
+  text-transform: none;
+}
+
+.boundary {
+  margin: 0.75rem 0 0;
+  color: var(--ui-muted);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.announcement {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem;
+  border-left: 3px solid var(--focus-accent);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ui-text);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.actionRow {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+}
+
+.actionRow > div {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  color: var(--ui-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.actionRow > div svg {
+  flex: 0 0 auto;
+  color: #29745f;
+}
+
+.actionRow button,
+.inlineState button,
+.inlineState a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.62rem 0.75rem;
+  border: 1px solid var(--focus-accent-strong);
+  border-radius: 9px;
+  background: var(--focus-accent-strong);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 680;
+}
+
+.actionRow button:hover:not(:disabled),
+.inlineState button:hover,
+.inlineState a:hover {
+  filter: brightness(0.9);
+}
+
+.actionRow button:disabled {
+  cursor: wait;
+  opacity: 0.66;
+}
+
+.inlineState {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+  color: var(--ui-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.inlineState:focus {
+  outline: 2px solid var(--focus-accent-strong);
+  outline-offset: 3px;
+}
+
+.inlineState > svg {
+  flex: 0 0 auto;
+  color: var(--focus-accent-strong);
+}
+
+.historyLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+  color: var(--focus-accent-strong);
+  font-size: 0.75rem;
+  font-weight: 680;
+}
+
+.historyLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.inlineState button,
+.inlineState a {
+  flex: 0 0 auto;
+  margin-left: auto;
+  background: white;
+  color: var(--focus-accent-strong);
+}
+
+.spinner {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .actionRow button,
+  .inlineState button,
+  .inlineState a {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .historyLink {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .card,
+  .actionRow button,
+  .inlineState button,
+  .inlineState a {
+    border: 1px solid CanvasText;
+  }
+}

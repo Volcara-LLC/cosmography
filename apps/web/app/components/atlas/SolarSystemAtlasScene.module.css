@@ -1,0 +1,183 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #16130b 0%, #05070b 42%, #010204 100%);
+  color: #f7f4ea;
+  color-scheme: dark;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.canvas:focus-visible,
+.label:focus-visible,
+.systemPicker button:focus-visible {
+  outline: 3px solid #8ae3ff;
+  outline-offset: -4px;
+}
+
+.systemPicker {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(138, 227, 255, 0.24);
+  border-radius: 0.45rem;
+  background: rgba(4, 8, 11, 0.86);
+  transform: translateX(-50%);
+  backdrop-filter: blur(12px);
+}
+
+.systemPicker span,
+.systemPicker button {
+  font: max(0.68rem, 12px) var(--font-mono);
+  white-space: nowrap;
+}
+
+.systemPicker span {
+  padding: 0 0.35rem;
+  color: #9fb1b7;
+}
+
+.systemPicker button {
+  min-height: 34px;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(222, 229, 235, 0.22);
+  border-radius: 0.3rem;
+  background: rgba(12, 18, 22, 0.88);
+  color: #dce8eb;
+}
+
+.systemPicker button:hover,
+.systemPicker button[aria-current="location"] {
+  border-color: #8ae3ff;
+  background: rgba(15, 46, 56, 0.92);
+  color: #f6fbfc;
+}
+
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.label {
+  position: absolute;
+  display: grid;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #fffaf0;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.labelDot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(2, 4, 7, 0.72), 0 0 14px currentColor;
+}
+
+.labelText {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.1rem);
+  padding: 0.3rem 0.45rem;
+  border: 1px solid rgba(222, 229, 235, 0.3);
+  border-radius: 0.3rem;
+  background: rgba(4, 7, 10, 0.84);
+  font: 0.7rem var(--font-mono);
+  white-space: nowrap;
+  transform: translateY(-50%);
+  backdrop-filter: blur(10px);
+}
+
+.label[data-side="left"] .labelText {
+  right: calc(100% + 0.1rem);
+  left: auto;
+}
+
+.label:hover .labelText,
+.label[data-selected="true"] .labelText {
+  border-color: #8ae3ff;
+  background: rgba(15, 46, 56, 0.92);
+}
+
+.status {
+  position: absolute;
+  right: clamp(5.8rem, 7vw, 7.4rem);
+  bottom: 1rem;
+  max-width: 330px;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(138, 227, 255, 0.25);
+  background: rgba(4, 8, 11, 0.86);
+  color: #cad8dc;
+  font-size: max(0.75rem, 12px);
+  line-height: 1.45;
+}
+
+.status strong {
+  display: block;
+  color: #f6fbfc;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 0.65rem 0.8rem;
+  background: rgba(4, 7, 10, 0.9);
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1180px), (max-height: 819px) {
+  .status {
+    display: none;
+  }
+
+  .labelText {
+    font-size: max(0.65rem, 12px);
+  }
+}
+
+@media (max-width: 520px) {
+  .systemPicker {
+    top: 0.6rem;
+    max-width: calc(100% - 1rem);
+  }
+
+  .systemPicker span {
+    display: none;
+  }
+
+  .label:not([data-atlas="mars"]) .labelText {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .labelText,
+  .status {
+    border: 1px solid CanvasText;
+  }
+}
