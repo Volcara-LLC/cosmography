@@ -116,4 +116,10 @@ Each `wrangler secret put` command prompts securely in the terminal. Never add t
 
 The private development repository and its draft pull request remain authoritative. Before any deployment, record the immutable submission commit and create a judging tag such as `build-week-2026-judging-v1`. Roll back by redeploying the previous saved Worker version or the preceding immutable judging tag. Disabling the contest gate after judging requires only setting `JUDGE_ACCESS_MODE=disabled` in a deliberate later deployment; the application does not need to be rewritten.
 
-No open-source license has been selected. Absence of a license means the code is available for judging inspection but no general reuse permission is granted yet.
+## Licensing
+
+Original Cosmography software and documentation owned by the project are available under the [MIT License](LICENSE).
+
+The MIT License does not apply to third-party imagery, video, audio, datasets, maps, scientific products, trademarks, logos, mission materials, or other source content referenced or included by Cosmography. Materials from NASA, JPL, USGS, ESA, and every other external provider remain governed by their respective owners, source terms, licenses, attribution requirements, and usage policies. Their presence does not transfer ownership to Cosmography, relicense them under MIT, or imply agency endorsement.
+
+Preserve the repository's source, credit, provenance, and rights records. Before redistributing or reusing any third-party material, verify and follow the terms published by its original provider. Third-party software dependencies also remain subject to their own licenses as recorded by their packages and upstream projects.
