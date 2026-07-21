@@ -8,6 +8,14 @@ The submitted version provides an interactive WebGL atlas with seven scientific 
 
 The Mars stations are separate recorded presentation nodes. They do not provide solved rover poses, continuous movement, complete spherical coverage, or a complete street-level network. Solar System placement is illustrative rather than current ephemerides. Broader catalogs, AI chat, live external data, production accounts, and full mission-route traversal remain incomplete or planned.
 
+## How I Used Codex and GPT 5.6
+
+I created Cosmography as a solo project. I used GPT 5.6 to help me turn the original concept into product requirements, plan and prioritize features, develop the interaction design, and decide how the experience should distinguish recorded scientific evidence from reconstruction and simulation.
+
+I used Codex to implement and verify the project inside the repository. This included building and testing the application, integrating source-backed imagery and scientific data, correcting interface problems, running automated checks, maintaining evidence contracts, creating recovery checkpoints, and documenting both completed and unfinished capabilities.
+
+Codex and GPT 5.6 were development tools supporting my work. They were not human teammates or cofounders, and I am not presenting either one as an embedded runtime feature in the current prototype.
+
 ## Judge access
 
 Open `https://cosmography.ai` and enter the shared judging code supplied privately in the Devpost testing instructions. No email address, Cloudflare account, Cosmography account, GitHub account, or ChatGPT login is required.
