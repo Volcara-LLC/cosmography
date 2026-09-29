@@ -18,14 +18,14 @@
     "@cosmography/relativity": "file:../../packages/relativity",
     "drizzle-orm": "0.45.2",
     "lucide-react": "^1.25.0",
-    "next": "16.2.6",
+    "next": "16.3.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "three": "^0.185.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.45.1",
+    "@cloudflare/vite-plugin": "1.62.0",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
@@ -37,14 +37,14 @@
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
-    "miniflare": "4.20260714.0",
+    "miniflare": "5.20260926.0-alpha",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.1.5",
-    "wrangler": "4.112.0"
+    "wrangler": "4.143.0"
   },
   "type": "module"
 }
