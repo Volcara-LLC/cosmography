@@ -18,7 +18,7 @@
     "@cosmography/relativity": "file:../../packages/relativity",
     "drizzle-orm": "0.45.2",
     "lucide-react": "^1.25.0",
-    "next": "16.2.6",
+    "next": "16.4.2",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "three": "^0.185.1",
